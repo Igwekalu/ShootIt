@@ -1,7 +1,5 @@
 package com.bignerdranch.android.shootit;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
@@ -36,10 +34,7 @@ public class AddFriend extends FragmentActivity {
         super.onStop();
     }
 
-    public static Intent newIntent(Context packageContext) {
-        Intent i = new Intent(packageContext, AddFriend.class);
-        return i;
-    }
+
 }
 
 
