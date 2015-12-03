@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class AddFriend extends AppCompatActivity {
-
-    private RecyclerView mAddFriendRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,26 +15,6 @@ public class AddFriend extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
     }
 
-   /* @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
-
-        mAddFriendRecyclerView = (RecyclerView) view
-                .findViewById(R.id.friend_recycler_view);
-        mAddFriendRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        updateUI();
-        return view;
-    }
-
-    private void updateUI() {
-        FriendLab friendLab = FriendLab.get(getActivity());
-        List<FriendList> friendLists = friendLab.getFriendList();
-
-        mAdapter = new FriendAdapter(friendLists);
-        mAddFriendRecyclerView.setAdapter(mAdapter);
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
