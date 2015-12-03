@@ -26,8 +26,7 @@ public class FriendListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
-        mFriendRecyclerView = (RecyclerView) view
-                .findViewById(R.id.friend_recycler_view);
+        mFriendRecyclerView = (RecyclerView) view.findViewById(R.id.friend_recycler_view);
         mFriendRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
@@ -74,8 +73,7 @@ public class FriendListFragment extends Fragment {
         @Override
         public FriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater
-                    .inflate(R.layout.list_item_friend, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_friend, parent, false);
             return new FriendHolder(view);
         }
 

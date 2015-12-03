@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Created by igweigwe-kalu on 11/24/15.
+ * Created by Igwe Igwe-Kalu on 11/24/15.
  */
 public class FriendFragment extends Fragment{
 

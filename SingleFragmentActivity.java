@@ -23,6 +23,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Button mShootGym;
     private Button mShootLib;
     private Button mShootMather;
+    private Intent i;
 
     private Switch mSwitch;
 
@@ -34,6 +35,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_shooting_fragment);
+        AddFriend.newIntent(SingleFragmentActivity.this);
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.friend_layout);
@@ -49,8 +51,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = AddFriend.newIntent(SingleFragmentActivity.this);
-                //setContentView(R.layout.activity_add_friend);
+                setContentView(R.layout.activity_add_friend_fragment);
                 startActivity(i);
             }
         });
