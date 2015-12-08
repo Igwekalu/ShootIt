@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -21,18 +19,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-import org.json.JSONArray;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
 /**
  * Created by igweigwe-kalu on 11/25/15.
  */
 public abstract class SingleFragmentActivity extends FragmentActivity {
-    private UUID mId;
 
     private Button mfriendButton;
     private Button mShootGym;
@@ -45,9 +35,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private TextView phoneNumberView;
     private String mPhoneNumber;
 
-    private String mTitle;
-
-    private SwipeRefreshLayout swipeContainer;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -80,9 +67,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.activity_add_friend_fragment);
-
                 Intent i = AddFriendsActivity.newIntent(SingleFragmentActivity.this);
-
                 startActivity(i);
             }
         });

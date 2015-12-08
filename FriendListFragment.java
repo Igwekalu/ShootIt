@@ -1,12 +1,16 @@
 package com.bignerdranch.android.shootit;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,6 +25,11 @@ public class FriendListFragment extends Fragment {
     public TextView mDateTextView;
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
@@ -32,13 +41,18 @@ public class FriendListFragment extends Fragment {
     }
 
     public void updateUI() {
-        //FriendLab friendLab = FriendLab.get(getActivity());
-        FriendLab friendLab = new FriendLab(this.getContext());
-        //List<FriendList> friendLists = friendLab.getFriendList();
-        List<Shoot> allPosts = friendLab.getResults();
+        FriendListFragment updatedFragment = new FriendListFragment();
+        android.support.v4.app.FragmentManager fm = getFragmentManager();
 
+        FriendLab friendLab = new FriendLab(this.getContext());
+        List<Shoot> allPosts = friendLab.getResults();
         mAdapter = new FriendAdapter(allPosts);
         mFriendRecyclerView.setAdapter(mAdapter);
+
+        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.friend_recycler_view, updatedFragment);
+        //ft.addToBackStack(null).commit();
+        //FriendLab friendLab = FriendLab.get(getActivity());
     }
 
     private class FriendHolder extends RecyclerView.ViewHolder {

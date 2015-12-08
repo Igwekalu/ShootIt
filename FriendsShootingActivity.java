@@ -10,5 +10,4 @@ public class FriendsShootingActivity extends SingleFragmentActivity{
      protected Fragment createFragment() {
         return new FriendListFragment();
     }
-
 }
