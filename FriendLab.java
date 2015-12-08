@@ -30,7 +30,7 @@ public class FriendLab{
         return sFriendLab;
     }
 
-    private FriendLab(Context context) {
+    public FriendLab(Context context) {
         mFriendLists = new ArrayList<>();
         mShootList = new ArrayList<>(getResults());
         for (int i = 0; i < mShootList.size(); i++) {

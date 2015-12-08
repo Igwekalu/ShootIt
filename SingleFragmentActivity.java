@@ -1,6 +1,7 @@
 package com.bignerdranch.android.shootit;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,12 +15,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
 import org.json.JSONArray;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * Created by igweigwe-kalu on 11/25/15.
@@ -31,6 +38,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Button mShootGym;
     private Button mShootLib;
     private Button mShootMather;
+    private Button mRefreshButton;
 
     private Switch mSwitch;
 
@@ -40,6 +48,11 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private String mTitle;
 
     private SwipeRefreshLayout swipeContainer;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     protected abstract Fragment createFragment();
 
@@ -47,23 +60,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_shooting_fragment);
-
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-                fetchTimelineAsync(0);
-            }
-        });
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Shoot.class);
@@ -79,7 +75,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                     .commit();
         }
 
-
         mfriendButton = (Button) findViewById(R.id.add_friend);
         mfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +84,16 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 Intent i = AddFriendsActivity.newIntent(SingleFragmentActivity.this);
 
                 startActivity(i);
+            }
+        });
+
+
+        mRefreshButton = (Button) findViewById(R.id.button);
+        mRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FriendListFragment ff = new FriendListFragment();
+                ff.updateUI();
             }
         });
 
@@ -155,40 +160,48 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 }
             }
         });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-//gggg
+    @Override
+    public void onStart() {
+        super.onStart();
 
-
-    public void fetchTimelineAsync(int page) {
-        client.getHomeTimeline(0, new JsonHttpResponseHandler() {
-            public void onSuccess(JSONArray json) {
-                // Remember to CLEAR OUT old items before appending in the new ones
-                adapter.clear();
-                // ...the data has come back, add new items to your adapter...
-                adapter.addAll(...);
-                // Now we call setRefreshing(false) to signal refresh has finished
-                swipeContainer.setRefreshing(false);
-            }
-
-            public void onFailure(Throwable e) {
-                Log.d("DEBUG", "Fetch timeline error: " + e.toString());
-            }
-        });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "SingleFragment Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.bignerdranch.android.shootit/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
     }
-    /**
-     * Created by rpaine on 12/7/15.
-     */
-    public static class adapter {
-        public void clear() {
-            items.clear();
-            notifyDataSetChanged();
-        }
 
-        // Add a list of items
-        public void addAll(List<list> list) {
-            items.addAll(list);
-            notifyDataSetChanged();
-        }
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "SingleFragment Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.bignerdranch.android.shootit/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }

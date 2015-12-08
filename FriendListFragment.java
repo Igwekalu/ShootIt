@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class FriendListFragment extends Fragment {
 
-    private RecyclerView mFriendRecyclerView;
-    private FriendAdapter mAdapter;
-    private TextView mDateTextView;
+    public RecyclerView mFriendRecyclerView;
+    public FriendAdapter mAdapter;
+    public TextView mDateTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +31,9 @@ public class FriendListFragment extends Fragment {
         return view;
     }
 
-    private void updateUI() {
-        FriendLab friendLab = FriendLab.get(getActivity());
+    public void updateUI() {
+        //FriendLab friendLab = FriendLab.get(getActivity());
+        FriendLab friendLab = new FriendLab(this.getContext());
         //List<FriendList> friendLists = friendLab.getFriendList();
         List<Shoot> allPosts = friendLab.getResults();
 
@@ -43,8 +44,8 @@ public class FriendListFragment extends Fragment {
     private class FriendHolder extends RecyclerView.ViewHolder {
 
         public TextView mTitleTextView;
-        private FriendList mFriendList;
-        private Shoot mShootList;
+        public FriendList mFriendList;
+        public Shoot mShootList;
 
         /*public void bindFriend(FriendList friendList) {
             mFriendList = friendList;
@@ -73,6 +74,7 @@ public class FriendListFragment extends Fragment {
         private List<Shoot> mShootLists;
 
         public FriendAdapter(List<Shoot> posts) {
+
             //mFriendLists = friendLists;
             mShootLists = posts;
         }
