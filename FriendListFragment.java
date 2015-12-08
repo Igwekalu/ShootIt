@@ -18,12 +18,10 @@ public class FriendListFragment extends Fragment {
 
     private RecyclerView mFriendRecyclerView;
     private FriendAdapter mAdapter;
-    private TextView mTitleTextView;
     private TextView mDateTextView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
         mFriendRecyclerView = (RecyclerView) view.findViewById(R.id.friend_recycler_view);
@@ -35,9 +33,10 @@ public class FriendListFragment extends Fragment {
 
     private void updateUI() {
         FriendLab friendLab = FriendLab.get(getActivity());
-        List<FriendList> friendLists = friendLab.getFriendList();
+        //List<FriendList> friendLists = friendLab.getFriendList();
+        List<Shoot> allPosts = friendLab.getResults();
 
-        mAdapter = new FriendAdapter(friendLists);
+        mAdapter = new FriendAdapter(allPosts);
         mFriendRecyclerView.setAdapter(mAdapter);
     }
 
@@ -45,12 +44,18 @@ public class FriendListFragment extends Fragment {
 
         public TextView mTitleTextView;
         private FriendList mFriendList;
+        private Shoot mShootList;
 
-        public void bindFriend(FriendList friendList) {
+        /*public void bindFriend(FriendList friendList) {
             mFriendList = friendList;
             mTitleTextView.setText(mFriendList.getTitle());
             mDateTextView.setText(mFriendList.getDate().toString());
 
+        }*/
+        public void bindShoot(Shoot shoot){
+            mShootList = shoot;
+            mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
+            mDateTextView.setText(mShootList.getDate().toString());
         }
 
         public FriendHolder(View itemView) {
@@ -65,9 +70,11 @@ public class FriendListFragment extends Fragment {
     private class FriendAdapter extends RecyclerView.Adapter<FriendHolder> {
 
         private List<FriendList> mFriendLists;
+        private List<Shoot> mShootLists;
 
-        public FriendAdapter(List<FriendList> friendLists) {
-            mFriendLists = friendLists;
+        public FriendAdapter(List<Shoot> posts) {
+            //mFriendLists = friendLists;
+            mShootLists = posts;
         }
 
         @Override
@@ -79,13 +86,16 @@ public class FriendListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(FriendHolder holder, int position) {
-            FriendList friendList = mFriendLists.get(position);
-            holder.bindFriend(friendList);
+            //FriendList friendList = mFriendLists.get(position);
+            Shoot shoot = mShootLists.get(position);
+            //holder.bindFriend(friendList);
+            holder.bindShoot(shoot);
         }
 
         @Override
         public int getItemCount() {
-            return mFriendLists.size();
+            return mShootLists.size();
+            //return mFriendLists.size();
         }
 
     }

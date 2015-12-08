@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Igwe Igwe-Kalu on 12/3/15.
  */
-public class AddFriendListFragment extends Fragment{
+public class AddFriendListFragment extends Fragment {
 
         private RecyclerView mAddFriendRecyclerView;
         private AddFriendAdapter mAddAdapter;
@@ -96,8 +96,8 @@ public class AddFriendListFragment extends Fragment{
             }
 
         }
-    public static Intent newIntent(Context packageContext) {
+    /*public static Intent newIntent(Context packageContext) {
         Intent i = new Intent(packageContext, AddFriendListFragment.class);
         return i;
-    }
+    }*/
 }
