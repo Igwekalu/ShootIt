@@ -1,5 +1,7 @@
 package com.bignerdranch.android.shootit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 /**
@@ -9,5 +11,10 @@ public class AddFriendsActivity extends SingleAddFriendsActivity {
     @Override
     protected Fragment createFragment() {
         return new AddFriendListFragment();
+    }
+
+    public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, AddFriendsActivity.class);
+        return i;
     }
 }

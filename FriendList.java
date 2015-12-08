@@ -1,7 +1,6 @@
 package com.bignerdranch.android.shootit;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,7 +21,6 @@ public class FriendList {
         mId = UUID.randomUUID();
         mDate = new Date();
     }
-
 
     public UUID getId() {
         return mId;

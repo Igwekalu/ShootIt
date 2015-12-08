@@ -1,5 +1,7 @@
 package com.bignerdranch.android.shootit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +16,7 @@ import java.util.List;
 /**
  * Created by Igwe Igwe-Kalu on 12/3/15.
  */
-public class AddFriendListFragment extends Fragment{
+public class AddFriendListFragment extends Fragment {
 
         private RecyclerView mAddFriendRecyclerView;
         private AddFriendAdapter mAddAdapter;
@@ -94,5 +96,8 @@ public class AddFriendListFragment extends Fragment{
             }
 
         }
-
+    /*public static Intent newIntent(Context packageContext) {
+        Intent i = new Intent(packageContext, AddFriendListFragment.class);
+        return i;
+    }*/
 }

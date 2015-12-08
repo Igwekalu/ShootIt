@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+
 /**
  * Created by Igwe Igwe-Kalu on 12/3/15.
  */
@@ -14,6 +19,8 @@ public abstract class SingleAddFriendsActivity extends FragmentActivity{
 
     private Button mAddButton;
     protected abstract Fragment createFragment();
+    private SwipeRefreshLayout swipeContainer;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
