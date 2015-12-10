@@ -1,6 +1,8 @@
 package com.bignerdranch.android.shootit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +14,12 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.LocationListener;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -29,6 +33,9 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Button mShootLib;
     private Button mShootMather;
     private Button mRefreshButton;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+
 
     private Switch mSwitch;
 
@@ -168,6 +175,9 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 Uri.parse("android-app://com.bignerdranch.android.shootit/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
+
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
     }
 
     @Override
