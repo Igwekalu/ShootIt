@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -58,7 +59,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_add_friend_fragment);
+
                 Intent i = AddFriendsActivity.newIntent(SingleFragmentActivity.this);
                 startActivity(i);
             }

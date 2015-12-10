@@ -14,9 +14,11 @@
         android:id = "@+id/addfriend_name"
         android:hint="@string/addfriend_name_hint"/>
 
-    <EditText android:id="@+id/friend_number"
+    <EditText
+        android:id="@+id/friend_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/addfriend_number"/>
 
 </LinearLayout>
+

@@ -96,8 +96,4 @@ public class AddFriendListFragment extends Fragment {
             }
 
         }
-    /*public static Intent newIntent(Context packageContext) {
-        Intent i = new Intent(packageContext, AddFriendListFragment.class);
-        return i;
-    }*/
 }

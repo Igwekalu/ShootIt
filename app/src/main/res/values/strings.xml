@@ -28,4 +28,5 @@
     <string name="addfriend_name_title">Friend\'s Name</string>
     <string name="refresh_button">Refresh</string>
     <string name="phone_number">Phone Number</string>
+    <string name="done_button">Done!</string>
 </resources>

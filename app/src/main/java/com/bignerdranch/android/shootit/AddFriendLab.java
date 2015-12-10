@@ -25,7 +25,7 @@ public class AddFriendLab {
 
     private AddFriendLab(Context context) {
         mAddFriendLists = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             AddFriendList addfriendList= new AddFriendList();
             addfriendList.setTitle("Friend #" + i);
             mAddFriendLists.add(addfriendList);

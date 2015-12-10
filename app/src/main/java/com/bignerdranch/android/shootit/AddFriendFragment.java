@@ -1,5 +1,7 @@
 package com.bignerdranch.android.shootit;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -19,6 +22,8 @@ public class AddFriendFragment extends Fragment {
     private EditText mAddNameField;
     private EditText mAddNumberField;
     private AddFriendList mAddFriendList;
+    private Button mAddButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class AddFriendFragment extends Fragment {
 
         mAddFriend = new AddFriend();
         mAddFriendList = new AddFriendList();
+
     }
 
 
@@ -33,6 +39,9 @@ public class AddFriendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_addfriendlist, container, false);
+
+
+
         mAddNameField = (EditText)v.findViewById(R.id.addfriend_name);
         mAddNameField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,6 +83,13 @@ public class AddFriendFragment extends Fragment {
         });
 
         return v;
+    }
+
+
+
+    public static Intent newIntent(Context packageContext) {
+        Intent j = new Intent(packageContext, AddFriendFragment.class);
+        return j;
     }
 
 

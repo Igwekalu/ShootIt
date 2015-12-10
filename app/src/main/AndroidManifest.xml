@@ -33,6 +33,10 @@
             android:name=".AddFriendsActivity"
             android:label="title_activity_add_friends_activity">
         </activity>
+        <activity
+            android:name=".AddFriendsActivity$AddAFriend"
+            android:label="title_activity_add_friends_activity">
+        </activity>
     </application>
 
 </manifest>
