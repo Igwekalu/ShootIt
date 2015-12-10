@@ -14,7 +14,7 @@
     <string name="top_layout">Top Layout</string>
     <string name="friendshot_list">Friends Shot List</string>
     <string name="title_activity_add_friend">Add Friend</string>
-    <string name="title_activity_add_friendListFragment">Friend List Fragment</string>
+    <string name="title_activity_add_friends_activity">Friend List Activity</string>
     <string name="friends">Friends</string>
     <string name="friends_add_list">Add Friends</string>
     <string name="search_layout">Search Layout</string>
