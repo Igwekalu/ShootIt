@@ -1,12 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context=".friends_shooting">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".friends_shooting">
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,6 +25,16 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:id="@+id/motto"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Refresh"
+            android:id="@+id/refresh_button"
+            android:layout_gravity="right"
+            android:clickable="true" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,7 +55,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_friend"
-            android:id="@+id/add_friend"/>
+            android:id="@+id/add_friend"
+            android:clickable="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/phone_number"
+            android:hint="@string/phone_number"
+            android:layout_weight="1"
+            android:editable="true" />
 
     </LinearLayout>
 

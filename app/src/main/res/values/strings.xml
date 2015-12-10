@@ -26,4 +26,6 @@
     <string name="addfriend_name_hint">Add Friend\'s Name!</string>
     <string name="addfriend_number">Add Friend\'s Number</string>
     <string name="addfriend_name_title">Friend\'s Name</string>
+    <string name="refresh_button">Refresh</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

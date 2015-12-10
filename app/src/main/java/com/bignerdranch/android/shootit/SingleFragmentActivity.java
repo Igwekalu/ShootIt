@@ -1,9 +1,6 @@
 package com.bignerdranch.android.shootit;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,11 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.location.LocationListener;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -33,20 +25,13 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Button mShootLib;
     private Button mShootMather;
     private Button mRefreshButton;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-
+    //private LocationManager locationManager;
+    //private LocationListener locationListener;
 
     private Switch mSwitch;
 
     private TextView phoneNumberView;
     private String mPhoneNumber;
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     protected abstract Fragment createFragment();
 
@@ -80,12 +65,15 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         });
 
 
-        mRefreshButton = (Button) findViewById(R.id.button);
+        mRefreshButton = (Button) findViewById(R.id.refresh_button);
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*setContentView(R.layout.activity_friends_shooting_fragment);
+                Intent i = SingleAddFriendsActivity.newIntent(this);
+                startActivity(i);
                 FriendListFragment ff = new FriendListFragment();
-                ff.updateUI();
+                //ff.updateUI();*/
             }
         });
 
@@ -152,51 +140,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 }
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "SingleFragment Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.bignerdranch.android.shootit/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "SingleFragment Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.bignerdranch.android.shootit/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
+    //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 }

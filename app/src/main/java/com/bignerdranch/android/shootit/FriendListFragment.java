@@ -1,10 +1,8 @@
 package com.bignerdranch.android.shootit;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +20,6 @@ public class FriendListFragment extends Fragment {
 
     public RecyclerView mFriendRecyclerView;
     public FriendAdapter mAdapter;
-    public TextView mDateTextView;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
@@ -41,16 +38,16 @@ public class FriendListFragment extends Fragment {
     }
 
     public void updateUI() {
-        FriendListFragment updatedFragment = new FriendListFragment();
-        android.support.v4.app.FragmentManager fm = getFragmentManager();
+        //FriendListFragment updatedFragment = new FriendListFragment();
+        //android.support.v4.app.FragmentManager fm = getFragmentManager();
 
         FriendLab friendLab = new FriendLab(this.getContext());
         List<Shoot> allPosts = friendLab.getResults();
         mAdapter = new FriendAdapter(allPosts);
         mFriendRecyclerView.setAdapter(mAdapter);
 
-        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.friend_recycler_view, updatedFragment);
+        //android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
+        //ft.replace(R.id.friend_recycler_view, updatedFragment);
         //ft.addToBackStack(null).commit();
         //FriendLab friendLab = FriendLab.get(getActivity());
     }
@@ -58,6 +55,7 @@ public class FriendListFragment extends Fragment {
     private class FriendHolder extends RecyclerView.ViewHolder {
 
         public TextView mTitleTextView;
+        public TextView mDateTextView;
         public FriendList mFriendList;
         public Shoot mShootList;
 
@@ -70,13 +68,11 @@ public class FriendListFragment extends Fragment {
         public void bindShoot(Shoot shoot){
             mShootList = shoot;
             mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
-            mDateTextView.setText(mShootList.getDate().toString());
+            mDateTextView.setText(mShootList.getDateString());
         }
 
         public FriendHolder(View itemView) {
             super(itemView);
-
-
             mTitleTextView=(TextView)itemView.findViewById(R.id.list_item_friend_title);
             mDateTextView= (TextView)itemView.findViewById(R.id.list_item_date);
         }
@@ -86,9 +82,69 @@ public class FriendListFragment extends Fragment {
 
         private List<FriendList> mFriendLists;
         private List<Shoot> mShootLists;
+        final ListAdapter mListAdapter = new ListAdapter() {
+            @Override
+            public boolean areAllItemsEnabled() {
+                return false;
+            }
+
+            @Override
+            public boolean isEnabled(int position) {
+                return false;
+            }
+
+            @Override
+            public void registerDataSetObserver(DataSetObserver observer) {
+
+            }
+
+            @Override
+            public void unregisterDataSetObserver(DataSetObserver observer) {
+
+            }
+
+            @Override
+            public int getCount() {
+                return mShootLists.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public boolean hasStableIds() {
+                return false;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                return null;
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return 0;
+            }
+
+            @Override
+            public int getViewTypeCount() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+        };
 
         public FriendAdapter(List<Shoot> posts) {
-
             //mFriendLists = friendLists;
             mShootLists = posts;
         }
@@ -111,7 +167,10 @@ public class FriendListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mShootLists.size();
-            //return mFriendLists.size();
+        }
+
+        public int getItem(int position){
+            return 0;
         }
 
     }

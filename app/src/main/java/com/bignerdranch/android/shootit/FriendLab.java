@@ -35,11 +35,8 @@ public class FriendLab{
         mShootList = new ArrayList<>(getResults());
         for (int i = 0; i < mShootList.size(); i++) {
             Shoot shoot = new Shoot();
-            //FriendList friendList = new FriendList();
             shoot.setPhone(mShootList.get(i).getPhone());
-            //friendList.setTitle(getPost(mShootList, i));
-            //mFriendLists.add(friendList);
-            //mShootList.add(shoot);
+            shoot.setDate(mShootList.get(i).getDate());
         }
     }
 
@@ -60,13 +57,13 @@ public class FriendLab{
         mShootList = new ArrayList<Shoot>();
 
         final ParseQuery<Shoot> query = Shoot.getQuery();
-        query.whereEqualTo("PhoneNumber", "7818542809");
+        query.orderByDescending("createdAt").whereExists("PhoneNumber");
         query.findInBackground(new FindCallback<Shoot>() {
             @Override
             public void done(final List<Shoot> List, ParseException e) {
                 if (e == null) {
                     for (final Shoot post : List) {
-                        mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber")));
+                        mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber"), post.getDate("createdAt")));
                     }
                 } else {
                     Log.d("error", "didn't work" + e.getMessage());
