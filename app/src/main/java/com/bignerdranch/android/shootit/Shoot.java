@@ -71,7 +71,7 @@ public class Shoot extends ParseObject{
 
     public void setDate(Date date) {
         mDate = date;
-        put("CreatedAt", date);
+        put("CreatedAt", mDate);
     }
 
     public void setObjectId(String id){

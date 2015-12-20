@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
@@ -48,14 +49,12 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         ParseObject.registerSubclass(Shoot.class);
         Parse.initialize(this, "SiMNxGWtpqUqvPjFHNDC8X9vv95gYHHq3BuuOoyQ", "MjWwXB0bRNHaiaw8fB20gf1uN0IIFYwteTp0INDY");
 
-        FragmentManager fm = getSupportFragmentManager();
+        final FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.friend_layout);
 
         if (fragment == null) {
             fragment = createFragment();
-            fm.beginTransaction()
-                    .add(R.id.friend_layout, fragment)
-                    .commit();
+            fm.beginTransaction().add(R.id.friend_layout, fragment).commit();
         }
 
         mfriendButton = (Button) findViewById(R.id.add_friend);
@@ -73,11 +72,12 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*setContentView(R.layout.activity_friends_shooting_fragment);
-                Intent i = SingleAddFriendsActivity.newIntent(this);
-                startActivity(i);*/
-                FriendListFragment ff = new FriendListFragment();
-                ff.updateUI();
+                Fragment frg = null;
+                frg = getSupportFragmentManager().findFragmentById(R.id.friend_layout);
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.detach(frg);
+                ft.attach(frg);
+                ft.commit();
             }
         });
 
@@ -94,7 +94,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 Shoot gymShoot = new Shoot();
                 gymShoot.setLocation("Gym");
                 gymShoot.setPhone(mPhoneNumber);
-                gymShoot.setDate(mDate);
+                //gymShoot.setDate(mDate);
                 gymShoot.saveInBackground();
                 Toast.makeText(SingleFragmentActivity.this, "You Shot the Gym! ", Toast.LENGTH_SHORT).show();
 
