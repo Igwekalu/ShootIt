@@ -25,7 +25,5 @@
         android:inputType="number"
         android:phoneNumber="true" />
 
-
-
 </LinearLayout>
 

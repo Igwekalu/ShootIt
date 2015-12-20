@@ -19,6 +19,8 @@ public class Shoot extends ParseObject{
     private String mObjectId;
     private UUID mId;
     private Date mDate;
+    private static Date mCurrDate;
+
 
     public Shoot() {
         //this(UUID.randomUUID());
@@ -59,6 +61,7 @@ public class Shoot extends ParseObject{
     }
 
     public Date getDate(){ return mDate;}
+    public static Date getCurrentDate(){return mCurrDate;}
 
     public String getDateString(){
         if (mDate != null){

@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
+import java.util.Date;
+
 /**
  * Created by igweigwe-kalu on 11/25/15.
  */
@@ -33,6 +35,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 
     private TextView phoneNumberView;
     private String mPhoneNumber;
+    private Date mDate;
 
     protected abstract Fragment createFragment();
 
@@ -87,9 +90,11 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 mPhoneNumber = phoneNumberView.getText().toString();
+                mDate = Shoot.getCurrentDate();
                 Shoot gymShoot = new Shoot();
                 gymShoot.setLocation("Gym");
                 gymShoot.setPhone(mPhoneNumber);
+                gymShoot.setDate(mDate);
                 gymShoot.saveInBackground();
                 Toast.makeText(SingleFragmentActivity.this, "You Shot the Gym! ", Toast.LENGTH_SHORT).show();
 

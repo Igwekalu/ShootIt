@@ -1,16 +1,16 @@
 package com.bignerdranch.android.shootit;
 
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 import org.json.JSONArray;
 
@@ -22,7 +22,6 @@ public abstract class SingleAddFriendsActivity extends FragmentActivity{
     private Button mAddButton;
     protected abstract Fragment createFragment();
     private SwipeRefreshLayout swipeContainer;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public abstract class SingleAddFriendsActivity extends FragmentActivity{
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddFriendsActivity.AddAFriend AddAFriend= new AddFriendsActivity.AddAFriend();
                 Intent i = AddAFriend.newIntent(SingleAddFriendsActivity.this);
                 startActivity(i);
