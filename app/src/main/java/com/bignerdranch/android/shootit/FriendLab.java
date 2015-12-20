@@ -67,7 +67,7 @@ public class FriendLab{
                     }
                 } else {
                     Log.d("error", "didn't work" + e.getMessage());
-                }
+              }
             }
         });
         return mShootList;

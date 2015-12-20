@@ -8,17 +8,24 @@
         android:layout_height="wrap_content"
         android:text="@string/addfriend_name_title"
         style="?android:listSeparatorTextViewStyle"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id = "@+id/addfriend_name"
-        android:hint="@string/addfriend_name_hint"/>
+        android:hint="@string/addfriend_name_hint"
+        android:inputType="textPersonName"
+        android:phoneNumber="false" />
 
     <EditText
         android:id="@+id/friend_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/addfriend_number"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/addfriend_number"
+        android:inputType="number"
+        android:phoneNumber="true" />
+
+
 
 </LinearLayout>
 

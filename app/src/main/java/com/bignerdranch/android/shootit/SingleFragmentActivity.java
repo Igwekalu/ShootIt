@@ -72,9 +72,9 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             public void onClick(View v) {
                 /*setContentView(R.layout.activity_friends_shooting_fragment);
                 Intent i = SingleAddFriendsActivity.newIntent(this);
-                startActivity(i);
+                startActivity(i);*/
                 FriendListFragment ff = new FriendListFragment();
-                //ff.updateUI();*/
+                ff.updateUI();
             }
         });
 

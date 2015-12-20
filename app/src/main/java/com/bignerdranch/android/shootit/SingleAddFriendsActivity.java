@@ -51,9 +51,6 @@ public abstract class SingleAddFriendsActivity extends FragmentActivity{
                 Intent i = AddAFriend.newIntent(SingleAddFriendsActivity.this);
                 startActivity(i);
 
-
-
-
             }
         });
     }

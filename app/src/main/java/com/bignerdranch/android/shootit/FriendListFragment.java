@@ -43,7 +43,7 @@ public class FriendListFragment extends Fragment {
 
         FriendLab friendLab = new FriendLab(this.getContext());
         List<Shoot> allPosts = friendLab.getResults();
-        mAdapter = new FriendAdapter(allPosts);
+        //mAdapter = new FriendAdapter(allPosts);
         mFriendRecyclerView.setAdapter(mAdapter);
 
         //android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
