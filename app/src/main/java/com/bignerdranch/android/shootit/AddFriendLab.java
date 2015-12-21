@@ -16,18 +16,14 @@ import java.util.List;
 public class AddFriendLab {
 
     private static AddFriendLab sAddFriendLab;
-    private AddFriendList mAddFriendList;
     private List<Friend> mFriendList;
     public static List<Friend> mStaticFriendsList;
-    private Adapter mAdapter;
 
-    //private List<AddFriendList> mAddFriendLists;
 
     public List<Friend> getFriends() {
         mFriendList = new ArrayList<Friend>();
         final ParseQuery<Friend> query = Friend.getQuery();
         query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mAddFriendNumber);
-        //query.whereExists("PhoneNumber");
         try{
             List<Friend> queryResult = query.find();
             for (Friend friend : queryResult){
@@ -49,7 +45,6 @@ public class AddFriendLab {
     }
 
     private AddFriendLab(Context context) {
-        //mFriendList = new ArrayList<>();
 
         mFriendList = getFriends();
         for (int i = 0; i < mFriendList.size(); i++) {
@@ -58,18 +53,5 @@ public class AddFriendLab {
             friend.setPhone(mFriendList.get(i).getPhone());
         }
     }
-
-    public List<Friend> getAddFriendList() {
-        return mFriendList;
-    }
-
-    /*public AddFriendList getFriendList(UUID id) {
-        for (Friend friend : mFriendList) {
-            if (friend.getId().equals(id)) {
-                return friend;
-            }
-        }
-        return null;
-    }*/
 
 }

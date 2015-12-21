@@ -24,11 +24,6 @@ public class AddFriendListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-   /* @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }*/
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -43,7 +38,6 @@ public class AddFriendListFragment extends Fragment {
 
     private void updateUI() {
         AddFriendLab addfriendLab = AddFriendLab.get(this.getContext());
-        //List<AddFriendList> addfriendLists = addfriendLab.getAddFriendList();
         List<Friend> friendList = addfriendLab.getFriends();
         mAddAdapter = new AddFriendAdapter(friendList);
         mAddFriendRecyclerView.setAdapter(mAddAdapter);

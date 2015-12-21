@@ -18,6 +18,8 @@ public class AddFriendsActivity extends SingleAddFriendsActivity {
         return i;
     }
 
+
+
     public static class AddAFriend extends SingleAddFriendsActivity{
         @Override
         protected Fragment createFragment() {
@@ -29,5 +31,6 @@ public class AddFriendsActivity extends SingleAddFriendsActivity {
             Intent j = new Intent(packageContext, AddAFriend.class);
             return j;
         }
+
     }
 }

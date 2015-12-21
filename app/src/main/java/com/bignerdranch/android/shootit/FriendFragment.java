@@ -17,7 +17,6 @@ import android.widget.EditText;
 public class FriendFragment extends Fragment{
 
     private FriendsShooting mFriendsShooting;
-    //private List<ParseObject> mPosts;
     private EditText mNameField;
     private Button mDateButton;
     private FriendList mFriendList;

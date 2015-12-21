@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -23,19 +25,13 @@ public class AddFriendFragment extends Fragment {
     private Friend mAddFriend;
     private EditText mAddNameField;
     private EditText mAddNumberField;
-    private Friend mAddFriendList;
-    //private AddFriendList mAddFriendList;
-    private Button mAddButton;
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //mAddFriend = new AddFriend();
         mAddFriend = new Friend();
-        //mAddFriendList = new AddFriendList();
 
     }
 
@@ -45,7 +41,7 @@ public class AddFriendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_addfriendlist, container, false);
 
-        //Activity got = SingleAddFriendsActivity.getActivity();
+
 
         mAddNameField = (EditText)v.findViewById(R.id.addfriend_name);
         mAddNameField.addTextChangedListener(new TextWatcher() {
@@ -79,7 +75,6 @@ public class AddFriendFragment extends Fragment {
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
                 mAddFriend.setPhone(s.toString());
-                //mAddFriendList.setPhone(s.toString());
             }
 
             @Override
@@ -93,14 +88,16 @@ public class AddFriendFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     Toast.makeText(getActivity(), "Adding " + mAddFriend.getName() + " to friends list...", Toast.LENGTH_SHORT).show();
-                    if (SingleFragmentActivity.mAddFriendNumber.isEmpty()){
+                    if (SingleFragmentActivity.mAddFriendNumber.isEmpty()) {
                         mAddFriend.setMyNumber("Default Number");
-                    }else {
+                    } else {
                         mAddFriend.setMyNumber(SingleFragmentActivity.mAddFriendNumber);
                     }
                     mAddFriend.saveInBackground();
+
                     return true;
                 }
+
                 return false;
             }
         });

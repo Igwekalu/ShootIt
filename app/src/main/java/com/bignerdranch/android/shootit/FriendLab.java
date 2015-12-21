@@ -15,11 +15,9 @@ import java.util.List;
 public class FriendLab{
 
     private static FriendLab sFriendLab;
-    //private FriendList mFriendLists;
-    //public List<ParseObject> mShootList = new ArrayList<ParseObject>();
+
     private List<Friend> mFriendList;
     private List<Shoot> mShootList;
-    private Friend mFriend;
     private List<String> mFriendsNumbers;
 
 
@@ -31,7 +29,7 @@ public class FriendLab{
     }
 
     public FriendLab(Context context) {
-        //mFriendLists = new ArrayList<>();
+
         mShootList = new ArrayList<>(getResults());
         for (int i = 0; i < mShootList.size(); i++) {
             Shoot shoot = new Shoot();
@@ -43,7 +41,6 @@ public class FriendLab{
         mFriendList = new ArrayList<Friend>();
         final ParseQuery<Friend> query = Friend.getQuery();
         query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mAddFriendNumber);
-        //query.whereExists("PhoneNumber");
         try{
             List<Friend> queryResult = query.find();
             for (Friend friend : queryResult){
@@ -86,5 +83,7 @@ public class FriendLab{
             return (phone + " shot the " + location + "!");
         }
     }
+
+
 
 }
