@@ -1,7 +1,6 @@
 package com.bignerdranch.android.shootit;
 
 import android.database.DataSetObserver;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by igweigwe-kalu on 11/25/15.
@@ -41,10 +39,10 @@ public class FriendListFragment extends Fragment {
     }
 
     public void updateUI() {
-
         FriendLab friendLab = new FriendLab(this.getContext());
         List<Shoot> allPosts = friendLab.getResults();
-        mAdapter = new FriendAdapter(allPosts);
+        List<Friend> allFriends = friendLab.getFriends();
+        mAdapter = new FriendAdapter(allPosts, allFriends);
         mFriendRecyclerView.setAdapter(mAdapter);
     }
 
@@ -53,6 +51,7 @@ public class FriendListFragment extends Fragment {
         public TextView mTitleTextView;
         public TextView mDateTextView;
         public Shoot mShootList;
+        public Friend mFriendList;
 
         //int[] ColorList = new int[]{Color.RED,Color.GREEN,Color.YELLOW};
         //Random random = new Random();
@@ -60,24 +59,23 @@ public class FriendListFragment extends Fragment {
 
 
         ArrayList<Integer> ColorList = new ArrayList<Integer>();
-        ColorList.add(){Color.RED,Color.GREEN,Color.YELLOW};
+        //ColorList.add(){Color.RED,Color.GREEN,Color.YELLOW};
 
-        /*public void bindFriend(FriendList friendList) {
-            mFriendList = friendList;
-            mTitleTextView.setText(mFriendList.getTitle());
-            mDateTextView.setText(mFriendList.getDate().toString());
-
-        }*/
-        public void bindShoot(Shoot shoot){
+        public void bindShoot(Shoot shoot, Friend friend){
             mShootList = shoot;
-            mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
+            mFriendList = friend;
+            if (friend.getName() != null) {
+                mTitleTextView.setText(mFriendList.getName() + " shot the " + mShootList.getLocation() + "!");
+            }else{
+                mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
+            }
             mDateTextView.setText(mShootList.getDateString());
         }
 
         public FriendHolder(View itemView) {
             super(itemView);
             mTitleTextView=(TextView)itemView.findViewById(R.id.list_item_friend_title);
-            mTitleTextView.setBackgroundColor(color);
+            //mTitleTextView.setBackgroundColor(color);
             mDateTextView= (TextView)itemView.findViewById(R.id.list_item_date);
         }
     }
@@ -85,6 +83,7 @@ public class FriendListFragment extends Fragment {
     private class FriendAdapter extends RecyclerView.Adapter<FriendHolder> {
 
         private List<Shoot> mShootLists;
+        private List<Friend> mFriendLists;
 
         final ListAdapter mListAdapter = new ListAdapter() {
             @Override
@@ -148,9 +147,9 @@ public class FriendListFragment extends Fragment {
             }
         };
 
-        public FriendAdapter(List<Shoot> posts) {
-            //mFriendLists = friendLists;
+        public FriendAdapter(List<Shoot> posts, List<Friend> friends) {
             mShootLists = posts;
+            mFriendLists = friends;
         }
 
         @Override
@@ -164,8 +163,9 @@ public class FriendListFragment extends Fragment {
         public void onBindViewHolder(FriendHolder holder, int position) {
             //FriendList friendList = mFriendLists.get(position);
             Shoot shoot = mShootLists.get(position);
+            Friend friend = mFriendLists.get(position);
             //holder.bindFriend(friendList);
-            holder.bindShoot(shoot);
+            holder.bindShoot(shoot, friend);
         }
 
         @Override

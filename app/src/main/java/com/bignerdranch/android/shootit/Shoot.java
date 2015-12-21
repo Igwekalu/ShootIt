@@ -11,6 +11,9 @@ import java.util.UUID;
  * Created by robbiepaine on 12/6/15.
  */
 
+//Class Shoot is an extention of a ParseObject that uses "put" to push fields into the
+//database. It retrieves using a getQuery method that returns a query with the specified
+//results. The database used is the "ShootIt" Parse Class that holds all shoots.
 @ParseClassName("ShootIt")
 public class Shoot extends ParseObject{
 
@@ -19,7 +22,6 @@ public class Shoot extends ParseObject{
     private String mObjectId;
     private UUID mId;
     private Date mDates;
-
 
     public Shoot() {
         //this(UUID.randomUUID());
@@ -72,12 +74,12 @@ public class Shoot extends ParseObject{
         //put("createdAt", mDate);
     }
 
-    public void setObjectId(String id){
-        mObjectId = id;
-    }
-
     public String getObjectId(){
         return mObjectId;
+    }
+
+    public void setObjectId(String id){
+        mObjectId = id;
     }
 
     public static ParseQuery<Shoot> getQuery() {

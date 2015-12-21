@@ -30,7 +30,6 @@ public class FriendFragment extends Fragment{
         mFriendList = new FriendList();
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

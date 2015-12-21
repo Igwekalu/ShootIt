@@ -11,6 +11,9 @@ import java.util.UUID;
  * Created by robbiepaine on 12/6/15.
  */
 
+//Class Friend is an extention of ParseObject that uses "put" to push fields into the
+//database. Like class "Shoot," it uses a getQuery method to return a query of the
+//specified results in the ShootItFriends Parse Class. This database holds all friends.
 @ParseClassName("ShootItFriends")
 public class Friend extends ParseObject{
 

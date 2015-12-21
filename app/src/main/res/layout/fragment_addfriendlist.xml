@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@android:color/background_light">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/addfriend_name_title"
-        style="?android:listSeparatorTextViewStyle"/>
+        style="?android:listSeparatorTextViewStyle"
+        android:textColor="@android:color/holo_blue_light"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -15,7 +17,10 @@
         android:id = "@+id/addfriend_name"
         android:hint="@string/addfriend_name_hint"
         android:inputType="textPersonName"
-        android:phoneNumber="false" />
+        android:phoneNumber="false"
+        android:background="@android:color/holo_green_light"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"/>
 
     <EditText
         android:id="@+id/friend_number"
@@ -23,7 +28,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/addfriend_number"
         android:inputType="number"
-        android:phoneNumber="true" />
+        android:phoneNumber="true"
+        android:background="@android:color/holo_green_light"
+        android:layout_marginTop="40dp"/>
 
 </LinearLayout>
 
