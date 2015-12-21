@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:editable="true"
             android:phoneNumber="true"
-            android:enabled="false"
+            android:enabled="true"
             android:focusableInTouchMode="true"
             android:focusable="true" />
 

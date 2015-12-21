@@ -35,7 +35,7 @@ public class AddFriendFragment extends Fragment {
 
         //mAddFriend = new AddFriend();
         mAddFriend = new Friend();
-       // mAddFriendList = new AddFriendList();
+        //mAddFriendList = new AddFriendList();
 
     }
 
@@ -79,6 +79,7 @@ public class AddFriendFragment extends Fragment {
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
                 mAddFriend.setPhone(s.toString());
+                //mAddFriendList.setPhone(s.toString());
             }
 
             @Override

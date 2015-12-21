@@ -3,7 +3,6 @@ package com.bignerdranch.android.shootit;
 import android.content.Context;
 import android.util.Log;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -58,18 +57,15 @@ public class FriendLab{
 
         final ParseQuery<Shoot> query = Shoot.getQuery();
         query.orderByDescending("createdAt").whereExists("PhoneNumber");
-        query.findInBackground(new FindCallback<Shoot>() {
-            @Override
-            public void done(final List<Shoot> List, ParseException e) {
-                if (e == null) {
-                    for (final Shoot post : List){
-                        mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber"), post.getDate("createdAt")));
-                    }
-                } else {
-                    Log.d("error", "didn't work" + e.getMessage());
-              }
+        try{
+            List<Shoot> queryResult = query.find();
+            for (Shoot post : queryResult){
+                mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber"), post.getDate("createdAt")));
             }
-        });
+        }
+        catch(ParseException e){
+            Log.d("error", "didn't work" + e.getMessage());
+        }
         return mShootList;
     }
 

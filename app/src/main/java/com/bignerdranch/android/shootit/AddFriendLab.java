@@ -2,8 +2,8 @@ package com.bignerdranch.android.shootit;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Adapter;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -18,8 +18,26 @@ public class AddFriendLab {
     private static AddFriendLab sAddFriendLab;
     private AddFriendList mAddFriendList;
     private List<Friend> mFriendList;
+    private Adapter mAdapter;
 
     //private List<AddFriendList> mAddFriendLists;
+
+    public List<Friend> getFriends() {
+        mFriendList = new ArrayList<Friend>();
+        final ParseQuery<Friend> query = Friend.getQuery();
+        query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mPhoneNumber);
+        //query.whereExists("PhoneNumber");
+        try{
+            List<Friend> queryResult = query.find();
+            for (Friend friend : queryResult){
+                mFriendList.add(new Friend(friend.getString("Name"), friend.getString("PhoneNumber"), friend.getDate("createdAt")));
+            }
+        }
+        catch(ParseException e){
+            Log.d("error", "didn't work" + e.getMessage());
+        }
+        return mFriendList;
+    }
 
     public static AddFriendLab get(Context context) {
         if (sAddFriendLab == null) {
@@ -29,9 +47,9 @@ public class AddFriendLab {
     }
 
     private AddFriendLab(Context context) {
-        mFriendList = new ArrayList<>();
+        //mFriendList = new ArrayList<>();
 
-        mFriendList = new ArrayList<>(getFriends());
+        mFriendList = getFriends();
         for (int i = 0; i < mFriendList.size(); i++) {
             Friend friend = new Friend();
             friend.setName(mFriendList.get(i).getName());
@@ -51,26 +69,5 @@ public class AddFriendLab {
         }
         return null;
     }*/
-
-    public List<Friend> getFriends() {
-        mFriendList = new ArrayList<Friend>();
-
-        final ParseQuery<Friend> query = Friend.getQuery();
-        //query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mPhoneNumber);
-        query.whereExists("PhoneNumber");
-        query.findInBackground(new FindCallback<Friend>() {
-            @Override
-            public void done(final List<Friend> List, ParseException e) {
-                if (e == null) {
-                    for (final Friend friend : List) {
-                        mFriendList.add(new Friend(friend.getString("Name"), friend.getString("PhoneNumber"), friend.getDate("createdAt")));
-                    }
-                } else {
-                    Log.d("error", "didn't work" + e.getMessage());
-                }
-            }
-        });
-        return mFriendList;
-    }
 
 }

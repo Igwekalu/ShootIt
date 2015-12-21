@@ -8,9 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.telephony.TelephonyManager;
-import android.text.Layout;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -70,7 +68,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPhoneNumber = phoneNumberView.getText().toString();
+                //mPhoneNumber = phoneNumberView.getText().toString();
                 Intent i = AddFriendsActivity.newIntent(SingleFragmentActivity.this);
                 startActivity(i);
             }
@@ -110,32 +108,18 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             }
         });
 
-
-
-        if (((TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()
-                == TelephonyManager.PHONE_TYPE_NONE){
-            mPhoneNumber = "0000000000";
-        }
-
-        else{
-            tMgr = (TelephonyManager) mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
-            mPhoneNumber = tMgr.getLine1Number();
-        }
-
-
-
-
         phoneNumberView = (TextView) findViewById(R.id.phone_number);
         mPhoneNumber = phoneNumberView.getText().toString();
-        phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
-        phoneNumberView.setEnabled(false);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        //phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
+        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
         mShootGym = (Button) findViewById(R.id.shoot_gym);
         mShootGym.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPhoneNumber = phoneNumberView.getText().toString();
                 mDate = Shoot.getCurrentDate();
                 Shoot gymShoot = new Shoot();
                 gymShoot.setLocation("Gym");
