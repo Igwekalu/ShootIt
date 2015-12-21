@@ -1,7 +1,9 @@
 package com.bignerdranch.android.shootit;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -20,6 +23,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by igweigwe-kalu on 11/25/15.
@@ -34,8 +38,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Context mAppContext;
     private TelephonyManager tMgr;
 
-    //private LocationManager locationManager;
-    //private LocationListener locationListener;
+
 
     private Switch mSwitch;
 
@@ -63,14 +66,12 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 
             fragment = createFragment();
             fm.beginTransaction().add(R.id.friend_layout, fragment).commit();
-            Toast.makeText(SingleFragmentActivity.this, "Pass! ", Toast.LENGTH_SHORT).show();
         }
 
         mfriendButton = (Button) findViewById(R.id.add_friend);
         mfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mPhoneNumber = phoneNumberView.getText().toString();
                 Intent i = AddFriendsActivity.newIntent(SingleFragmentActivity.this);
                 startActivity(i);
             }
@@ -93,20 +94,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 ft.detach(fragment1);
                 ft.attach(fragment1).commit();
 
-                /*Fragment currentFragment = SingleFragmentActivity.this.getSupportFragmentManager().findFragmentById(R.id.friend_layout);
-
-                    FragmentTransaction fragTransaction =   (SingleFragmentActivity.this.getSupportFragmentManager().beginTransaction());
-                    fragTransaction.detach(currentFragment);
-                    fragTransaction.attach(currentFragment);
-                    fragTransaction.commit();*/
-
-               /* Fragment frg = null;
-                frg = getSupportFragmentManager().findFragmentById(R.id.friend_layout);
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.detach(frg);
-                ft.attach(frg);
-                ft.commit();
-                ft.show(frg);*/
             }
         });
 
@@ -128,6 +115,13 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         }
 
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+
+        phoneNumberView = (TextView) findViewById(R.id.phone_number);
+        phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
+        phoneNumberView.setEnabled(false);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
         mShootGym = (Button) findViewById(R.id.shoot_gym);

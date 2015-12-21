@@ -66,9 +66,9 @@
             android:id="@+id/phone_number"
             android:hint="@string/phone_number"
             android:layout_weight="1"
-            android:editable="true"
+            android:editable="false"
             android:phoneNumber="true"
-            android:enabled="true"
+            android:enabled="false"
             android:focusableInTouchMode="true"
             android:focusable="true" />
 
