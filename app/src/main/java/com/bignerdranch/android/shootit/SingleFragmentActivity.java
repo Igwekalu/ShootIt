@@ -90,26 +90,22 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                 ft.attach(fragment1).commit();
             }
         });
-
-        phoneNumberView = (TextView) findViewById(R.id.phone_number);
-
-
-        if (((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()
-                == TelephonyManager.PHONE_TYPE_NONE) {
-            //uncomment this to hardcode number
+        if (((TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()
+                == TelephonyManager.PHONE_TYPE_NONE){
             mPhoneNumber = "6172334779";
-            //mPhoneNumber = phoneNumberView.toString();
-            //phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
-            //phoneNumberView.setEnabled(false);
             mAddFriendNumber = mPhoneNumber;
-        } else {
-            tMgr = (TelephonyManager) mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
-            mPhoneNumber = tMgr.getLine1Number();
-            //comment this to hardcode number
-            phoneNumberView.setEnabled(false);
-            phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
         }
 
+        else{
+            tMgr = (TelephonyManager) mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
+            mPhoneNumber = tMgr.getLine1Number();
+        }
+
+
+
+        phoneNumberView = (TextView) findViewById(R.id.phone_number);
+        phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
+        phoneNumberView.setEnabled(false);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mShootGym = (Button) findViewById(R.id.shoot_gym);
@@ -148,7 +144,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                     sms.sendTextMessage(mPhoneNumber, null, "Your friend " + mPhoneNumber + "is shooting the Library!", null, null);
                     Toast.makeText(SingleFragmentActivity.this, "SMS SENT", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(SingleFragmentActivity.this, "SMS Not Sent...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SingleFragmentActivity.this, "SMS Not Sent...Check Network Connection", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -168,7 +164,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
                     sms.sendTextMessage(mPhoneNumber, null, "Your friend " + mPhoneNumber + "is shooting Mather!", null, null);
                     Toast.makeText(SingleFragmentActivity.this, "SMS SENT", Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
-                    Toast.makeText(SingleFragmentActivity.this, "SMS Not Sent...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SingleFragmentActivity.this, "SMS Not Sent...Check Network Connection", Toast.LENGTH_LONG).show();
                 }
             }
         });
