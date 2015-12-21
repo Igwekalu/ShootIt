@@ -93,10 +93,10 @@ public class AddFriendFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     Toast.makeText(getActivity(), "Adding " + mAddFriend.getName() + " to friends list...", Toast.LENGTH_SHORT).show();
-                    if (SingleFragmentActivity.mPhoneNumber.isEmpty()){
+                    if (SingleFragmentActivity.mAddFriendNumber.isEmpty()){
                         mAddFriend.setMyNumber("Default Number");
                     }else {
-                        mAddFriend.setMyNumber(SingleFragmentActivity.mPhoneNumber);
+                        mAddFriend.setMyNumber(SingleFragmentActivity.mAddFriendNumber);
                     }
                     mAddFriend.saveInBackground();
                     return true;

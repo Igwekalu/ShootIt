@@ -25,7 +25,7 @@ public class AddFriendLab {
     public List<Friend> getFriends() {
         mFriendList = new ArrayList<Friend>();
         final ParseQuery<Friend> query = Friend.getQuery();
-        query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mPhoneNumber);
+        query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mAddFriendNumber);
         //query.whereExists("PhoneNumber");
         try{
             List<Friend> queryResult = query.find();

@@ -39,28 +39,12 @@ public class FriendLab{
         }
     }
 
-    public List<Friend> getFriendList() {
-
-        final ParseQuery<Friend> query = Friend.getQuery();
-        query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mPhoneNumber);
-        try{
-            List<Friend> queryResult = query.find();
-            for (Friend friend : queryResult){
-                mFriendLists.add(new Friend(friend.getString("Name"), friend.getString("PhoneNumber"), friend.getDate("createdAt")));
-            }
-        }
-        catch(ParseException e){
-            Log.d("error", "didn't work" + e.getMessage());
-        }
-        return mFriendLists;
-    }
-
     public List<Shoot> getResults() {
         mShootList = new ArrayList<Shoot>();
-        mFriendLists = new ArrayList<Friend>(getFriendList());
+
         final ParseQuery<Shoot> query = Shoot.getQuery();
-        for (int i=0; i<mFriendLists.size(); i++)
-        query.orderByDescending("createdAt").whereMatches("PhoneNumber", mFriendLists.get(i).getPhone());
+        //for (int i=0; i<mFriendLists.size(); i++)
+        query.orderByDescending("createdAt").whereExists("PhoneNumber");
         try{
             List<Shoot> queryResult = query.find();
             for (Shoot post : queryResult){
