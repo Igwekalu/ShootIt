@@ -1,13 +1,16 @@
 package com.bignerdranch.android.shootit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.telephony.TelephonyManager;
 import android.text.Layout;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -29,6 +32,9 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Button mShootLib;
     private Button mShootMather;
     private Button mRefreshButton;
+    private Context mAppContext;
+    private TelephonyManager tMgr;
+
     //private LocationManager locationManager;
     //private LocationListener locationListener;
 
@@ -53,8 +59,10 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         Fragment fragment = fm.findFragmentById(R.id.friend_layout);
 
         if (fragment == null) {
+
             fragment = createFragment();
             fm.beginTransaction().add(R.id.friend_layout, fragment).commit();
+            Toast.makeText(SingleFragmentActivity.this, "Pass! ", Toast.LENGTH_SHORT).show();
         }
 
         mfriendButton = (Button) findViewById(R.id.add_friend);
@@ -72,24 +80,58 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment frg = null;
+
+                Fragment fragment1 = fm.findFragmentById(R.id.friend_layout);
+                if(fragment1 == null){
+                    fragment1 = createFragment();
+                }
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.detach(fragment1);
+                ft.attach(fragment1).commit();
+
+                /*Fragment currentFragment = SingleFragmentActivity.this.getSupportFragmentManager().findFragmentById(R.id.friend_layout);
+
+                    FragmentTransaction fragTransaction =   (SingleFragmentActivity.this.getSupportFragmentManager().beginTransaction());
+                    fragTransaction.detach(currentFragment);
+                    fragTransaction.attach(currentFragment);
+                    fragTransaction.commit();*/
+
+               /* Fragment frg = null;
                 frg = getSupportFragmentManager().findFragmentById(R.id.friend_layout);
-                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.detach(frg);
                 ft.attach(frg);
                 ft.commit();
+                ft.show(frg);*/
             }
         });
 
-        //TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-        //mPhoneNumber = tm.getLine1Number();
+
+
+        if (((TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()
+                == TelephonyManager.PHONE_TYPE_NONE){
+            mPhoneNumber = "0000000000";
+        }
+
+        else{
+            tMgr = (TelephonyManager) mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
+            mPhoneNumber = tMgr.getLine1Number();
+        }
+
+
+
+
         phoneNumberView = (TextView) findViewById(R.id.phone_number);
+        phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
+        phoneNumberView.setEnabled(false);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         mShootGym = (Button) findViewById(R.id.shoot_gym);
         mShootGym.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPhoneNumber = phoneNumberView.getText().toString();
                 mDate = Shoot.getCurrentDate();
                 Shoot gymShoot = new Shoot();
                 gymShoot.setLocation("Gym");
@@ -105,7 +147,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mShootLib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPhoneNumber = phoneNumberView.getText().toString();
                 Shoot libShoot = new Shoot();
                 libShoot.setLocation("Library");
                 libShoot.setPhone(mPhoneNumber);
@@ -118,7 +159,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mShootMather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPhoneNumber = phoneNumberView.getText().toString();
                 Shoot matherShoot = new Shoot();
                 matherShoot.setLocation("Mather");
                 matherShoot.setPhone(mPhoneNumber);
