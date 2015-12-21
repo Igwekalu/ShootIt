@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -35,7 +34,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     private Switch mSwitch;
 
     private TextView phoneNumberView;
-    private String mPhoneNumber;
+    public static String mPhoneNumber;
     private Date mDate;
 
     protected abstract Fragment createFragment();
@@ -47,6 +46,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Shoot.class);
+        ParseObject.registerSubclass(Friend.class);
         Parse.initialize(this, "SiMNxGWtpqUqvPjFHNDC8X9vv95gYHHq3BuuOoyQ", "MjWwXB0bRNHaiaw8fB20gf1uN0IIFYwteTp0INDY");
 
         final FragmentManager fm = getSupportFragmentManager();
@@ -61,7 +61,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mfriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mPhoneNumber = phoneNumberView.getText().toString();
                 Intent i = AddFriendsActivity.newIntent(SingleFragmentActivity.this);
                 startActivity(i);
             }
@@ -72,6 +72,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(SingleFragmentActivity.this, "Getting  more Shoots... ", Toast.LENGTH_SHORT).show();
                 Fragment frg = null;
                 frg = getSupportFragmentManager().findFragmentById(R.id.friend_layout);
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -84,6 +85,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         //TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
         //mPhoneNumber = tm.getLine1Number();
         phoneNumberView = (TextView) findViewById(R.id.phone_number);
+        mPhoneNumber = phoneNumberView.getText().toString();
 
         mShootGym = (Button) findViewById(R.id.shoot_gym);
         mShootGym.setOnClickListener(new View.OnClickListener() {

@@ -11,29 +11,29 @@ import java.util.UUID;
  * Created by robbiepaine on 12/6/15.
  */
 
-@ParseClassName("ShootIt")
-public class Shoot extends ParseObject{
+@ParseClassName("ShootItFriends")
+public class Friend extends ParseObject{
 
-    private String mLocation;
+    private String mFriendName;
     private String mPhoneNumber;
     private String mObjectId;
+    private String mMyNumber;
     private UUID mId;
     private Date mDate;
-    private static Date mCurrDate;
 
 
-    public Shoot() {
+    public Friend() {
         //this(UUID.randomUUID());
         mObjectId = getObjectId();
         mPhoneNumber = getPhone();
-        mLocation = getLocation();
+        mFriendName = getName();
         mDate = getDate();
     }
 
-    public Shoot(String location, String phone, Date date) {
+    public Friend(String name, String phone, Date date) {
         // Generate unique identifier
         mId = UUID.randomUUID();
-        mLocation = location;
+        mFriendName = name;
         mPhoneNumber = phone;
         if (date == null){
             mDate = new Date();
@@ -42,8 +42,19 @@ public class Shoot extends ParseObject{
         }
     }
 
+    //public  getId(){ return mId; }
+
     public String getPhone() {
         return mPhoneNumber;
+    }
+
+    public void setMyNumber(String number){
+        mMyNumber = number;
+        put("MyNumber", number);
+    }
+
+    public String getMyNumber(){
+        return mMyNumber;
     }
 
     public void setPhone(String number){
@@ -51,18 +62,16 @@ public class Shoot extends ParseObject{
         put("PhoneNumber", number);
     }
 
-    public String getLocation() {
-        return mLocation;
+    public String getName() {
+        return mFriendName;
     }
 
-    public void setLocation(String value) {
-        mLocation = value;
-        put("Location", value);
+    public void setName(String value) {
+        mFriendName = value;
+        put("Name", value);
     }
 
     public Date getDate(){ return mDate;}
-
-    public static Date getCurrentDate(){return mCurrDate;}
 
     public String getDateString(){
         if (mDate != null){
@@ -83,8 +92,8 @@ public class Shoot extends ParseObject{
         return mObjectId;
     }
 
-    public static ParseQuery<Shoot> getQuery() {
-        return ParseQuery.getQuery(Shoot.class);
+    public static ParseQuery<Friend> getQuery() {
+        return ParseQuery.getQuery(Friend.class);
     }
 
 }

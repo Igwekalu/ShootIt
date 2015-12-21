@@ -30,7 +30,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Refresh"
+            android:text="Get more Shoots"
             android:id="@+id/refresh_button"
             android:layout_gravity="right"
             android:clickable="true" />

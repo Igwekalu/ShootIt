@@ -31,7 +31,7 @@ public class FriendLab{
     }
 
     public FriendLab(Context context) {
-        mFriendLists = new ArrayList<>();
+        //mFriendLists = new ArrayList<>();
         mShootList = new ArrayList<>(getResults());
         for (int i = 0; i < mShootList.size(); i++) {
             Shoot shoot = new Shoot();
@@ -62,7 +62,7 @@ public class FriendLab{
             @Override
             public void done(final List<Shoot> List, ParseException e) {
                 if (e == null) {
-                    for (final Shoot post : List) {
+                    for (final Shoot post : List){
                         mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber"), post.getDate("createdAt")));
                     }
                 } else {

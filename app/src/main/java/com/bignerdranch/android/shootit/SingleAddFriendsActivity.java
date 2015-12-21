@@ -7,12 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
-
-
-import org.json.JSONArray;
 
 /**
  * Created by Igwe Igwe-Kalu on 12/3/15.
@@ -28,7 +24,7 @@ public abstract class SingleAddFriendsActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend_fragment);
 
-        FragmentManager fm = getSupportFragmentManager();
+        final FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.friend_list);
 
 

@@ -56,7 +56,6 @@ public class FriendListFragment extends Fragment {
 
         public TextView mTitleTextView;
         public TextView mDateTextView;
-        public FriendList mFriendList;
         public Shoot mShootList;
 
         /*public void bindFriend(FriendList friendList) {
@@ -80,8 +79,8 @@ public class FriendListFragment extends Fragment {
 
     private class FriendAdapter extends RecyclerView.Adapter<FriendHolder> {
 
-        private List<FriendList> mFriendLists;
         private List<Shoot> mShootLists;
+
         final ListAdapter mListAdapter = new ListAdapter() {
             @Override
             public boolean areAllItemsEnabled() {

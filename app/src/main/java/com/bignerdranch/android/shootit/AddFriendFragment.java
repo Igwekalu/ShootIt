@@ -1,6 +1,5 @@
 package com.bignerdranch.android.shootit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +20,11 @@ import android.widget.Toast;
  */
 public class AddFriendFragment extends Fragment {
 
-    private AddFriend mAddFriend;
+    private Friend mAddFriend;
     private EditText mAddNameField;
     private EditText mAddNumberField;
-    private AddFriendList mAddFriendList;
+    private Friend mAddFriendList;
+    //private AddFriendList mAddFriendList;
     private Button mAddButton;
 
 
@@ -33,8 +33,9 @@ public class AddFriendFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAddFriend = new AddFriend();
-        mAddFriendList = new AddFriendList();
+        //mAddFriend = new AddFriend();
+        mAddFriend = new Friend();
+       // mAddFriendList = new AddFriendList();
 
     }
 
@@ -57,7 +58,7 @@ public class AddFriendFragment extends Fragment {
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mAddFriend.setTitle(s.toString());
+                mAddFriend.setName(s.toString());
             }
 
             @Override
@@ -77,7 +78,7 @@ public class AddFriendFragment extends Fragment {
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mAddFriend.setTitle(s.toString());
+                mAddFriend.setPhone(s.toString());
             }
 
             @Override
@@ -90,7 +91,13 @@ public class AddFriendFragment extends Fragment {
         mAddNumberField.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Toast.makeText(getActivity(), mAddNumberField.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Adding " + mAddFriend.getName() + " to friends list...", Toast.LENGTH_SHORT).show();
+                    if (SingleFragmentActivity.mPhoneNumber.isEmpty()){
+                        mAddFriend.setMyNumber("Default Number");
+                    }else {
+                        mAddFriend.setMyNumber(SingleFragmentActivity.mPhoneNumber);
+                    }
+                    mAddFriend.saveInBackground();
                     return true;
                 }
                 return false;
