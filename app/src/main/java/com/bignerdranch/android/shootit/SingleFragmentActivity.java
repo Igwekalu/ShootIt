@@ -92,9 +92,9 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         if (((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()
                 == TelephonyManager.PHONE_TYPE_NONE) {
             //uncomment this to hardcode number
-            // mPhoneNumber = "6172334779";
-            phoneNumberView = (TextView) findViewById(R.id.phone_number);
-            mPhoneNumber = phoneNumberView.toString();
+            mPhoneNumber = "6172334779";
+            //phoneNumberView = (TextView) findViewById(R.id.phone_number);
+            //mPhoneNumber = phoneNumberView.toString();
             mAddFriendNumber = mPhoneNumber;
         } else {
             tMgr = (TelephonyManager) mAppContext.getSystemService(Context.TELEPHONY_SERVICE);
