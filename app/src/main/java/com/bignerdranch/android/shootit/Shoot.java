@@ -22,6 +22,7 @@ public class Shoot extends ParseObject{
     private String mObjectId;
     private UUID mId;
     private Date mDates;
+    private String mName;
 
     public Shoot() {
         //this(UUID.randomUUID());
@@ -62,6 +63,14 @@ public class Shoot extends ParseObject{
     }
 
     public Date getDate(){ return mDates;}
+
+    public String getName(String number) {
+        for (int i = 0; i < AddFriendLab.mStaticFriendsList.size(); i++) {
+            if (AddFriendLab.mStaticFriendsList.get(i).getPhone() == number)
+                return AddFriendLab.mStaticFriendsList.get(i).getName();
+        }
+        return number;
+    }
 
     public String getDateString(){
         if (mDates != null){

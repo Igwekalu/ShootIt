@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,7 @@ public class FriendListFragment extends Fragment {
 
     public RecyclerView mFriendRecyclerView;
     public FriendAdapter mAdapter;
+    public List<Friend> mFriendList;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
@@ -42,6 +47,7 @@ public class FriendListFragment extends Fragment {
 
     public void updateUI() {
         FriendLab friendLab = new FriendLab(this.getContext());
+        AddFriendLab addFriendLab= new AddFriendLab(this.getContext());
         List<Shoot> allPosts = friendLab.getResults();
         mAdapter = new FriendAdapter(allPosts);
         mFriendRecyclerView.setAdapter(mAdapter);
@@ -64,8 +70,31 @@ public class FriendListFragment extends Fragment {
 
 
         public void bindShoot(Shoot shoot){
+            mFriendList = new ArrayList<Friend>();
+            final ParseQuery<Friend> query = Friend.getQuery();
+            query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mAddFriendNumber);
+            try{
+                List<Friend> queryResult = query.find();
+                for (Friend friend : queryResult){
+                    mFriendList.add(new Friend(friend.getString("Name"), friend.getString("PhoneNumber"), friend.getDate("createdAt")));
+                }
+            }
+            catch(ParseException e){
+                Log.d("error", "didn't work" + e.getMessage());
+            }
+            String mFriend = null;
             mShootList = shoot;
-            mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
+            /*for (int i=0;i<mFriendList.size();i++) {
+                if (mShootList.getPhone() == mFriendList.get(i).getPhone()){
+                    mFriend = mFriendList.get(i).getName();
+                }
+            }*/
+
+            if (mFriend != null) {
+                mTitleTextView.setText(mFriend + " shot the " + mShootList.getLocation() + "!");
+            }else {
+                mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
+            }
             mDateTextView.setText(mShootList.getDateString());
         }
 

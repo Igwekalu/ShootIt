@@ -2,7 +2,6 @@ package com.bignerdranch.android.shootit;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,8 +19,6 @@ import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
-
-import java.util.Random;
 
 /**
  * Created by igweigwe-kalu on 11/25/15.
@@ -104,7 +101,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 
 
         phoneNumberView = (TextView) findViewById(R.id.phone_number);
-        phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
+        phoneNumberView.setText("My #: " + mPhoneNumber);
         phoneNumberView.setEnabled(false);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 

@@ -2,7 +2,6 @@ package com.bignerdranch.android.shootit;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Adapter;
 
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -44,7 +43,7 @@ public class AddFriendLab {
         return sAddFriendLab;
     }
 
-    private AddFriendLab(Context context) {
+    public AddFriendLab(Context context) {
 
         mFriendList = getFriends();
         for (int i = 0; i < mFriendList.size(); i++) {
