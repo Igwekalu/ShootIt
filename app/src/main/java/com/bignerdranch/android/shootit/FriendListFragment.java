@@ -67,7 +67,7 @@ public class FriendListFragment extends Fragment {
         public void bindShoot(Shoot shoot){
             mShootList = shoot;
             mTitleTextView.setText(mShootList.getPhone() + " shot the " + mShootList.getLocation() + "!");
-            mDateTextView.setText(mShootList.getDate().toString());
+            mDateTextView.setText(mShootList.getDateString());
         }
 
         public FriendHolder(View itemView) {

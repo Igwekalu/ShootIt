@@ -39,6 +39,7 @@ public class FriendLab{
             shoot.setDate(mShootList.get(i).getDate());
         }
     }
+
     public List<Friend> getFriends() {
         mFriendList = new ArrayList<Friend>();
         final ParseQuery<Friend> query = Friend.getQuery();
@@ -68,7 +69,7 @@ public class FriendLab{
         try{
             List<Shoot> queryResult = query.find();
             for (Shoot post : queryResult){
-                mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber"), post.getDate("createdAt")));
+                mShootList.add(new Shoot(post.getString("Location"), post.getString("PhoneNumber"), post.getCreatedAt()));
             }
         }
         catch(ParseException e){

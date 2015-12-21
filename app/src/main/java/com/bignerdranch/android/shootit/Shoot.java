@@ -18,8 +18,7 @@ public class Shoot extends ParseObject{
     private String mPhoneNumber;
     private String mObjectId;
     private UUID mId;
-    private Date mDate;
-    private static Date mCurrDate;
+    private Date mDates;
 
 
     public Shoot() {
@@ -27,7 +26,7 @@ public class Shoot extends ParseObject{
         mObjectId = getObjectId();
         mPhoneNumber = getPhone();
         mLocation = getLocation();
-        mDate = getDate();
+        mDates = getDate();
     }
 
     public Shoot(String location, String phone, Date date) {
@@ -36,9 +35,9 @@ public class Shoot extends ParseObject{
         mLocation = location;
         mPhoneNumber = phone;
         if (date == null){
-            mDate = new Date();
+            mDates = new Date();
         }else {
-            mDate = date;
+            mDates = date;
         }
     }
 
@@ -60,19 +59,17 @@ public class Shoot extends ParseObject{
         put("Location", value);
     }
 
-    public Date getDate(){ return mDate;}
-
-    public static Date getCurrentDate(){return mCurrDate;}
+    public Date getDate(){ return mDates;}
 
     public String getDateString(){
-        if (mDate != null){
-            return mDate.toString();
+        if (mDates != null){
+            return mDates.toString();
         }else return "No Date Available";
     }
 
     public void setDate(Date date) {
-        mDate = date;
-        put("CreatedAt", mDate);
+        mDates = date;
+        //put("createdAt", mDate);
     }
 
     public void setObjectId(String id){
