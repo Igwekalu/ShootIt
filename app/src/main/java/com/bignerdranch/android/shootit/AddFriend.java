@@ -5,9 +5,6 @@ import android.support.v4.app.FragmentActivity;
 
 public class AddFriend extends FragmentActivity {
 
-    protected Fragment createFragment() {
-        return new AddFriendFragment();
-    }
 
     @Override
     protected void onDestroy() {

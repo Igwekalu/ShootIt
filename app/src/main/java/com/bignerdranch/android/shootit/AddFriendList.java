@@ -11,10 +11,6 @@ public class AddFriendList {
     private String mTitle;
 
 
-    public AddFriendList() {
-        this(UUID.randomUUID());
-    }
-
     public AddFriendList(UUID id) {
         // Generate unique identifier
         mId = UUID.randomUUID();

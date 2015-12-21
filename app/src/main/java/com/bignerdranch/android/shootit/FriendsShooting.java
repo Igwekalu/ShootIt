@@ -12,9 +12,6 @@ public class FriendsShooting extends FragmentActivity {
 
     }
 
-    protected Fragment createFragment() {
-        return new FriendFragment();
-    }
 
     @Override
     protected void onDestroy() {
