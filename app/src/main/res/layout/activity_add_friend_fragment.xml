@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/friend_list"
-        android:backgroundTint="@android:color/holo_blue_light"
+        android:backgroundTint="#070000"
         android:layout_below="@+id/friends_add_list">
     </LinearLayout>
 

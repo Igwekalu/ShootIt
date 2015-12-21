@@ -17,7 +17,8 @@
         android:layout_below="@+id/top_layout"
         android:layout_alignParentBottom="false"
         android:layout_alignParentTop="false"
-        android:id="@+id/motto_layout">
+        android:id="@+id/motto_layout"
+        android:longClickable="false">
 
         <TextView
             android:layout_width="match_parent"
@@ -27,7 +28,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:id="@+id/motto"
-            android:textColor="@android:color/holo_blue_light"/>
+            android:textColor="@android:color/holo_blue_light"
+            android:textAlignment="center"
+            android:singleLine="false" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -37,7 +40,7 @@
             android:id="@+id/refresh_button"
             android:layout_gravity="right"
             android:clickable="true"
-            android:textColor="@android:color/holo_red_light"/>
+            android:textColor="#020000" />
 
     </LinearLayout>
 
@@ -53,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="@string/off_switch"
             android:id="@+id/off_switch"
-            android:textColor="@android:color/holo_blue_dark"/>
+            android:textColor="#060000"/>
 
         <Button
             android:layout_width="wrap_content"

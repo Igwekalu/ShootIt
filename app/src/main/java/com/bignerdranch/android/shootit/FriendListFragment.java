@@ -1,6 +1,7 @@
 package com.bignerdranch.android.shootit;
 
 import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by igweigwe-kalu on 11/25/15.
@@ -51,13 +53,15 @@ public class FriendListFragment extends Fragment {
         public TextView mDateTextView;
         public Shoot mShootList;
 
-        //int[] ColorList = new int[]{Color.RED,Color.GREEN,Color.YELLOW};
-        //Random random = new Random();
-        //int color = ColorList.get(random.nextInt(ColorList.length));
 
+        public int color;
+        Random rand = new Random();
 
-        ArrayList<Integer> ColorList = new ArrayList<Integer>();
-        //ColorList.add(){Color.RED,Color.GREEN,Color.YELLOW};
+        int r = rand.nextInt(255);
+        int g = rand.nextInt(255);
+        int b = rand.nextInt(255);
+        int randomColor = Color.rgb(r, g, b);
+
 
         public void bindShoot(Shoot shoot){
             mShootList = shoot;
@@ -68,8 +72,9 @@ public class FriendListFragment extends Fragment {
         public FriendHolder(View itemView) {
             super(itemView);
             mTitleTextView=(TextView)itemView.findViewById(R.id.list_item_friend_title);
-            //mTitleTextView.setBackgroundColor(color);
+            mTitleTextView.setBackgroundColor(randomColor);
             mDateTextView= (TextView)itemView.findViewById(R.id.list_item_date);
+            mDateTextView.setBackgroundColor(randomColor);
         }
     }
 

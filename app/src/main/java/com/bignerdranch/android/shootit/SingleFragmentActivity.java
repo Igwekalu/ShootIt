@@ -2,6 +2,7 @@ package com.bignerdranch.android.shootit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
+
+import java.util.Random;
 
 /**
  * Created by igweigwe-kalu on 11/25/15.
@@ -89,11 +93,11 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
 
         phoneNumberView = (TextView) findViewById(R.id.phone_number);
 
+
         if (((TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()
                 == TelephonyManager.PHONE_TYPE_NONE) {
             //uncomment this to hardcode number
-            mPhoneNumber = "6172334779";
-            //phoneNumberView = (TextView) findViewById(R.id.phone_number);
+            //mPhoneNumber = "6172334779";
             //mPhoneNumber = phoneNumberView.toString();
             mAddFriendNumber = mPhoneNumber;
         } else {
@@ -104,7 +108,7 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             phoneNumberView.setText("My Phone Number: " + mPhoneNumber);
         }
 
-        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mShootGym = (Button) findViewById(R.id.shoot_gym);
         mShootGym.setOnClickListener(new View.OnClickListener() {
@@ -186,5 +190,4 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             }
         });
     }
-    //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 }
