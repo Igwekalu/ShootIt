@@ -8,7 +8,6 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by igweigwe-kalu on 11/24/15.
@@ -18,8 +17,9 @@ public class FriendLab{
     private static FriendLab sFriendLab;
     //private FriendList mFriendLists;
     //public List<ParseObject> mShootList = new ArrayList<ParseObject>();
-    private List<FriendList> mFriendLists;
+    private List<Friend> mFriendLists;
     private List<Shoot> mShootList;
+    private Friend mFriend;
 
 
     public static FriendLab get(Context context) {
@@ -39,24 +39,28 @@ public class FriendLab{
         }
     }
 
-    public List<FriendList> getFriendList() {
-        return mFriendLists;
-    }
+    public List<Friend> getFriendList() {
 
-    public FriendList getFriendList(UUID id) {
-        for (FriendList friendList : mFriendLists) {
-            if (friendList.getId().equals(id)) {
-                return friendList;
+        final ParseQuery<Friend> query = Friend.getQuery();
+        query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mPhoneNumber);
+        try{
+            List<Friend> queryResult = query.find();
+            for (Friend friend : queryResult){
+                mFriendLists.add(new Friend(friend.getString("Name"), friend.getString("PhoneNumber"), friend.getDate("createdAt")));
             }
         }
-        return null;
+        catch(ParseException e){
+            Log.d("error", "didn't work" + e.getMessage());
+        }
+        return mFriendLists;
     }
 
     public List<Shoot> getResults() {
         mShootList = new ArrayList<Shoot>();
-
+        mFriendLists = new ArrayList<Friend>(getFriendList());
         final ParseQuery<Shoot> query = Shoot.getQuery();
-        query.orderByDescending("createdAt").whereExists("PhoneNumber");
+        for (int i=0; i<mFriendLists.size(); i++)
+        query.orderByDescending("createdAt").whereMatches("PhoneNumber", mFriendLists.get(i).getPhone());
         try{
             List<Shoot> queryResult = query.find();
             for (Shoot post : queryResult){
@@ -78,4 +82,5 @@ public class FriendLab{
             return (phone + " shot the " + location + "!");
         }
     }
+
 }
