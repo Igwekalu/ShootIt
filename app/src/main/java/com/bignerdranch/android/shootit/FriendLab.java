@@ -17,9 +17,10 @@ public class FriendLab{
     private static FriendLab sFriendLab;
     //private FriendList mFriendLists;
     //public List<ParseObject> mShootList = new ArrayList<ParseObject>();
-    private List<Friend> mFriendLists;
+    private List<Friend> mFriendList;
     private List<Shoot> mShootList;
     private Friend mFriend;
+    private List<String> mFriendsNumbers;
 
 
     public static FriendLab get(Context context) {
@@ -38,13 +39,32 @@ public class FriendLab{
             shoot.setDate(mShootList.get(i).getDate());
         }
     }
+    public List<Friend> getFriends() {
+        mFriendList = new ArrayList<Friend>();
+        final ParseQuery<Friend> query = Friend.getQuery();
+        query.orderByDescending("createdAt").whereMatches("MyNumber", SingleFragmentActivity.mAddFriendNumber);
+        //query.whereExists("PhoneNumber");
+        try{
+            List<Friend> queryResult = query.find();
+            for (Friend friend : queryResult){
+                mFriendList.add(new Friend(friend.getString("Name"), friend.getString("PhoneNumber"), friend.getDate("createdAt")));
+            }
+        }
+        catch(ParseException e){
+            Log.d("error", "didn't work" + e.getMessage());
+        }
+        return mFriendList;
+    }
 
     public List<Shoot> getResults() {
         mShootList = new ArrayList<Shoot>();
-
-        final ParseQuery<Shoot> query = Shoot.getQuery();
-        //for (int i=0; i<mFriendLists.size(); i++)
-        query.orderByDescending("createdAt").whereExists("PhoneNumber");
+        mFriendList = new ArrayList<Friend>(getFriends());
+        mFriendsNumbers = new ArrayList<String>();
+        for (int i=0;i<mFriendList.size();i++) {
+            mFriendsNumbers.add(mFriendList.get(i).getPhone());
+        }
+        ParseQuery<Shoot> query = Shoot.getQuery();
+        query.orderByDescending("createdAt").whereContainedIn("PhoneNumber", mFriendsNumbers);
         try{
             List<Shoot> queryResult = query.find();
             for (Shoot post : queryResult){

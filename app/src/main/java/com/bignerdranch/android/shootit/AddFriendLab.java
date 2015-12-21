@@ -18,6 +18,7 @@ public class AddFriendLab {
     private static AddFriendLab sAddFriendLab;
     private AddFriendList mAddFriendList;
     private List<Friend> mFriendList;
+    public static List<Friend> mStaticFriendsList;
     private Adapter mAdapter;
 
     //private List<AddFriendList> mAddFriendLists;
@@ -36,6 +37,7 @@ public class AddFriendLab {
         catch(ParseException e){
             Log.d("error", "didn't work" + e.getMessage());
         }
+        mStaticFriendsList = mFriendList;
         return mFriendList;
     }
 
